@@ -292,8 +292,8 @@
         </div>
         <div class="col-lg-3 col-6 stats_info counter_grid2 mt-lg-0 mt-5">
           <span class="fa fa-smile-o"></span>
-          <p class="counter">80</p>
-          <h4>Success Meets</h4>
+          <p class="counter" id="visiters">80000</p>
+          <h4>Number of visiters</h4>
         </div>
       </div>
     </div>
@@ -744,7 +744,32 @@
       });
     });
   </script>
- 
+ <script>
+  // create a JSON object
+  var element = document.getElementById('visiters');
+  var visiter=parseInt(element.innerText);
+const json = {
+  "counter": visiter
+}
+console.log(visiter);
+
+// request options
+const options = {
+  method: 'POST',
+  body: JSON.stringify(json),
+  headers: {
+      'Content-Type': 'application/json'
+  }
+}
+
+// send post request
+fetch('https://yogafunction.azurewebsites.net/api/HttpTrigger1?code=sDu1HSXZpfzZf5dUmJGnGvANp-o3NcjOx_Hyd0jxrljaAzFuXLpdVw==', options)
+  .then(res => res.json())
+  .then(res =>{console.log(res)
+  element.innerText=res.newvalue;
+  })
+  .catch(err => console.error(err));
+ </script>
   <script src="assets/js/bootstrap.min.js"></script>
 
 </body>
